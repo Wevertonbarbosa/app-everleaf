@@ -1,4 +1,3 @@
-// Lib - Tarefas predefinidas do sistema
 import { Task } from "@/types/task.types";
 
 export const PREDEFINED_TASKS: Task[] = [

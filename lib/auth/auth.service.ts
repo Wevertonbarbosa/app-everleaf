@@ -1,4 +1,3 @@
-// Service - Lógica de negócio para autenticação
 import type { LoginCredentials, RegisterData, AuthResponse } from "@/types/auth.types"
 
 const VALID_EMAIL = "suporte@everleaf.com"
