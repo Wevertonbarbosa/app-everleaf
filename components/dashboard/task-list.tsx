@@ -2,15 +2,19 @@
 'use client';
 
 import { useState } from 'react';
-import type { Task } from '@/types/task.types';
+import type { Task, CreateTaskInput } from '@/types/task.types';
 import { TaskCard } from './task-card';
+import { CreateTaskModal } from './create-task-modal';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
+import { Plus, Circle } from 'lucide-react';
 import { PREDEFINED_TASKS } from '@/lib/tasks/predefined-tasks';
-import { Circle } from 'lucide-react'; // Declared Circle for use
+import { sortTasksByTime } from '@/lib/tasks/task-utils';
+import { useToast } from '@/hooks/use-toast';
 
 export function TaskList() {
     const [tasks, setTasks] = useState<Task[]>(PREDEFINED_TASKS);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { toast } = useToast();
 
     const handleToggleTask = (taskId: string, isActive: boolean) => {
         setTasks((prevTasks) =>
@@ -20,23 +24,46 @@ export function TaskList() {
         );
     };
 
-    const handleCreateTask = () => {
-        console.log('Criar nova tarefa - funcionalidade em desenvolvimento');
+    const handleCreateTask = (taskInput: CreateTaskInput) => {
+        const newTask: Task = {
+            id: `task-${Date.now()}`,
+            title: taskInput.title,
+            description: taskInput.description,
+            startDate: taskInput.startDate,
+            startTime: taskInput.startTime,
+            isActive: false,
+            isPredefined: false,
+            createdAt: new Date(),
+        };
+
+        setTasks((prevTasks) => [...prevTasks, newTask]);
+
+        toast({
+            title: 'Tarefa criada com sucesso!',
+            description: `"${newTask.title}" foi adicionada às suas tarefas.`,
+        });
     };
 
-    const activeTasks = tasks.filter((task) => task.isActive);
-    const inactiveTasks = tasks.filter((task) => !task.isActive);
+    const sortedTasks = sortTasksByTime(tasks);
+    const activeTasks = sortedTasks.filter((task) => task.isActive);
+    const inactiveTasks = sortedTasks.filter((task) => !task.isActive);
 
     return (
         <div className="space-y-6">
             {/* Botão de criar tarefa */}
             <Button
-                onClick={handleCreateTask}
+                onClick={() => setIsModalOpen(true)}
                 className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-6 text-base shadow-lg shadow-green-500/20"
             >
                 <Plus className="w-5 h-5 mr-2" />
                 Criar Nova Tarefa
             </Button>
+
+            <CreateTaskModal
+                open={isModalOpen}
+                onOpenChange={setIsModalOpen}
+                onCreateTask={handleCreateTask}
+            />
 
             {/* Tarefas ativas */}
             {activeTasks.length > 0 && (

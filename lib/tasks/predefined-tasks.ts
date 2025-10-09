@@ -1,4 +1,5 @@
-import { Task } from "@/types/task.types";
+// Lib - Tarefas predefinidas do sistema
+import type { Task } from '@/types/task.types';
 
 export const PREDEFINED_TASKS: Task[] = [
     {
@@ -9,6 +10,8 @@ export const PREDEFINED_TASKS: Task[] = [
         isActive: false,
         isPredefined: true,
         createdAt: new Date(),
+        startDate: new Date().toISOString().split('T')[0],
+        startTime: '09:00',
     },
     {
         id: 'task-2',
@@ -17,5 +20,7 @@ export const PREDEFINED_TASKS: Task[] = [
         isActive: false,
         isPredefined: true,
         createdAt: new Date(),
+        startDate: new Date().toISOString().split('T')[0],
+        startTime: '14:30',
     },
 ];

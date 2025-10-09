@@ -4,7 +4,8 @@
 import type { Task } from '@/types/task.types';
 import { Card } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
-import { CheckCircle2, Circle } from 'lucide-react';
+import { CheckCircle2, Circle, Clock, Calendar } from 'lucide-react';
+import { formatDate, formatTime } from '@/lib/tasks/task-utils';
 
 interface TaskCardProps {
     task: Task;
@@ -36,11 +37,23 @@ export function TaskCard({ task, onToggle }: TaskCardProps) {
                     >
                         {task.title}
                     </h3>
-                    <p className="text-sm text-gray-400 leading-relaxed">
+                    <p className="text-sm text-gray-400 leading-relaxed mb-2">
                         {task.description}
                     </p>
+
+                    <div className="flex items-center gap-3 text-xs text-gray-500 mb-2">
+                        <div className="flex items-center gap-1">
+                            <Calendar className="w-3.5 h-3.5" />
+                            <span>{formatDate(task.startDate)}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                            <Clock className="w-3.5 h-3.5" />
+                            <span>{formatTime(task.startTime)}</span>
+                        </div>
+                    </div>
+
                     {task.isPredefined && (
-                        <span className="inline-block mt-2 text-xs text-green-500 bg-green-500/10 px-2 py-1 rounded-full">
+                        <span className="inline-block text-xs text-green-500 bg-green-500/10 px-2 py-1 rounded-full">
                             Tarefa Sugerida
                         </span>
                     )}

@@ -6,9 +6,18 @@ export interface Task {
     isActive: boolean;
     isPredefined: boolean;
     createdAt: Date;
+    startDate: string; 
+    startTime: string;
 }
 
 export interface TaskToggleEvent {
     taskId: string;
     isActive: boolean;
+}
+
+export interface CreateTaskInput {
+    title: string;
+    description: string;
+    startDate: string;
+    startTime: string;
 }
