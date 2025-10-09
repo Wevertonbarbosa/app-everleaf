@@ -58,22 +58,25 @@ export function CreateTaskModal({
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="bg-gray-800 border-gray-700 text-white max-w-md mx-4 sm:mx-auto">
+            <DialogContent className="bg-gray-800 border-gray-700 text-white w-[calc(100vw-2rem)] max-w-[420px] mx-auto p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                    <DialogTitle className="text-xl font-bold text-white">
+                    <DialogTitle className="text-lg sm:text-xl font-bold text-white">
                         Criar Nova Tarefa
                     </DialogTitle>
-                    <DialogDescription className="text-gray-400">
+                    <DialogDescription className="text-sm text-gray-400">
                         Preencha os campos abaixo para adicionar uma nova tarefa
                     </DialogDescription>
                 </DialogHeader>
 
-                <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+                <form
+                    onSubmit={handleSubmit}
+                    className="space-y-3 sm:space-y-4 mt-3 sm:mt-4"
+                >
                     {/* Título */}
-                    <div className="space-y-2">
+                    <div className="space-y-1.5 sm:space-y-2">
                         <Label
                             htmlFor="title"
-                            className="text-sm font-medium text-gray-300"
+                            className="text-xs sm:text-sm font-medium text-gray-300"
                         >
                             Título da Tarefa *
                         </Label>
@@ -87,16 +90,16 @@ export function CreateTaskModal({
                                 })
                             }
                             placeholder="Ex: Reunião com cliente"
-                            className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 focus:border-green-500"
+                            className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 focus:border-green-500 text-sm sm:text-base h-9 sm:h-10"
                             required
                         />
                     </div>
 
                     {/* Descrição */}
-                    <div className="space-y-2">
+                    <div className="space-y-1.5 sm:space-y-2">
                         <Label
                             htmlFor="description"
-                            className="text-sm font-medium text-gray-300"
+                            className="text-xs sm:text-sm font-medium text-gray-300"
                         >
                             Descrição
                         </Label>
@@ -110,19 +113,18 @@ export function CreateTaskModal({
                                 })
                             }
                             placeholder="Descreva os detalhes da tarefa..."
-                            className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 focus:border-green-500 min-h-[80px] resize-none"
+                            className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 focus:border-green-500 min-h-[70px] sm:min-h-[80px] resize-none text-sm sm:text-base"
                             rows={3}
                         />
                     </div>
 
-                    {/* Data e Horário */}
-                    <div className="grid grid-cols-2 gap-3">
-                        <div className="space-y-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div className="space-y-1.5 sm:space-y-2">
                             <Label
                                 htmlFor="startDate"
-                                className="text-sm font-medium text-gray-300 flex items-center gap-1"
+                                className="text-xs sm:text-sm font-medium text-gray-300 flex items-center gap-1"
                             >
-                                <Calendar className="w-3.5 h-3.5" />
+                                <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                                 Data de Início *
                             </Label>
                             <Input
@@ -135,17 +137,17 @@ export function CreateTaskModal({
                                         startDate: e.target.value,
                                     })
                                 }
-                                className="bg-gray-900 border-gray-700 text-white focus:border-green-500"
+                                className="bg-gray-900 border-gray-700 text-white focus:border-green-500 text-sm sm:text-base h-9 sm:h-10"
                                 required
                             />
                         </div>
 
-                        <div className="space-y-2">
+                        <div className="space-y-1.5 sm:space-y-2">
                             <Label
                                 htmlFor="startTime"
-                                className="text-sm font-medium text-gray-300 flex items-center gap-1"
+                                className="text-xs sm:text-sm font-medium text-gray-300 flex items-center gap-1"
                             >
-                                <Clock className="w-3.5 h-3.5" />
+                                <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                                 Horário *
                             </Label>
                             <Input
@@ -158,25 +160,24 @@ export function CreateTaskModal({
                                         startTime: e.target.value,
                                     })
                                 }
-                                className="bg-gray-900 border-gray-700 text-white focus:border-green-500"
+                                className="bg-gray-900 border-gray-700 text-white focus:border-green-500 text-sm sm:text-base h-9 sm:h-10"
                                 required
                             />
                         </div>
                     </div>
 
-                    {/* Botões */}
-                    <div className="flex gap-3 pt-2">
+                    <div className="flex gap-2 sm:gap-3 pt-2">
                         <Button
                             type="button"
                             variant="outline"
                             onClick={() => onOpenChange(false)}
-                            className="flex-1 bg-transparent border-gray-700 text-gray-300 hover:bg-gray-700 hover:text-white"
+                            className="flex-1 bg-transparent border-gray-700 text-gray-300 hover:bg-gray-700 hover:text-white text-sm sm:text-base h-9 sm:h-10"
                         >
                             Cancelar
                         </Button>
                         <Button
                             type="submit"
-                            className="flex-1 bg-green-500 hover:bg-green-600 text-white font-semibold"
+                            className="flex-1 bg-green-500 hover:bg-green-600 text-white font-semibold text-sm sm:text-base h-9 sm:h-10"
                         >
                             Criar Tarefa
                         </Button>
